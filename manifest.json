@@ -12,5 +12,11 @@
       "js": ["content.js"]
     }
   ],
-  "web_accessible_resources": ["notification.mp3"]
+  "web_accessible_resources": ["notification2.mp3"],
+  "browser_specific_settings": {
+  "gecko": {
+    "id": "borderify@example.com"
+  }
+}
+
 }

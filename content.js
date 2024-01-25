@@ -1,3 +1,6 @@
+const isChrome = typeof chrome !== "undefined";
+const runtime = isChrome ? chrome.runtime : browser.runtime;
+
 const messageInput = document.querySelector("textarea#prompt-textarea");
 let sendButton = document.querySelector('button[data-testid="send-button"]');
 
@@ -6,17 +9,15 @@ sendButton.addEventListener("click", () => {
 });
 
 function startCheck() {
-  chrome.runtime.sendMessage({ getActiveTab: true });
+  runtime.sendMessage({ getActiveTab: true });
   const intervalId = setInterval(() => {
     if (document.querySelector('button[data-testid="send-button"]')) {
       clearInterval(intervalId);
       sendButton = document.querySelector('button[data-testid="send-button"]');
-      const audio = new Audio(chrome.runtime.getURL("notification.mp3"));
+      const audio = new Audio(runtime.getURL("notification2.mp3"));
       audio.play();
-      chrome.runtime.sendMessage({ setActiveTab: true });
-      chrome.runtime.sendMessage({ chatGPTDone: true });
-    } else {
-      console.log("Chat-gpt is still generating");
+      runtime.sendMessage({ setActiveTab: true });
+      runtime.sendMessage({ chatGPTDone: true });
     }
   }, 1000);
 }
